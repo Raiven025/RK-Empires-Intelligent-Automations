@@ -64,9 +64,9 @@ Domain replacement is **complete**. Detected from `CNAME`: `rk-empires.com`
 |---|---|---|---|
 | `index.html` | 12 | `<link rel="canonical">` `href` | `https://rk-empires.com/` |
 | `index.html` | 18 | `<meta property="og:url">` `content` | `https://rk-empires.com/` |
-| `index.html` | 21 | `<meta property="og:image">` `content` | `https://rk-empires.com/og-image.jpg` |
+| `index.html` | 21 | `<meta property="og:image">` `content` | `https://rk-empires.com/assets/images/og-image.jpg` |
 | `index.html` | 25 | `<meta name="twitter:url">` `content` | `https://rk-empires.com/` |
-| `index.html` | 28 | `<meta name="twitter:image">` `content` | `https://rk-empires.com/og-image.jpg` |
+| `index.html` | 28 | `<meta name="twitter:image">` `content` | `https://rk-empires.com/assets/images/og-image.jpg` |
 | `index.html` | 36 | JSON-LD `"url"` | `https://rk-empires.com/` |
 | `robots.txt` | 4 | `Sitemap:` directive | `https://rk-empires.com/sitemap.xml` |
 | `sitemap.xml` | 4 | `<loc>` | `https://rk-empires.com/` |
@@ -198,16 +198,20 @@ This is a plain static site — no build step required.
 ### Pre-deployment checklist
 - [x] Domain replacement complete — live domain `rk-empires.com` set in all files
 - [ ] Create and upload `assets/images/favicon.ico`, `apple-touch-icon.png`, `og-image.jpg`
-- [ ] Update `og:image` and `twitter:image` URLs to point to the deployed OG image
+- [x] `og:image` and `twitter:image` updated to `https://rk-empires.com/assets/images/og-image.jpg`
 - [ ] Verify Web3Forms access key is active at [web3forms.com](https://web3forms.com)
 - [ ] Test the contact form from the **deployed URL** (not `localhost`) after going live
 
-### Netlify
-1. Push project root to GitHub
-2. Connect repo in Netlify dashboard
-3. **Publish directory:** `/` (or leave blank — root is default)
-4. **Build command:** *(leave empty — no build step)*
-5. Deploy. Custom domain can be configured under Domain Settings.
+### GitHub Pages (Active — CNAME set to `rk-empires.com`)
+1. Go to repo **Settings → Pages**
+2. Source: **Deploy from a branch** → Branch: `main` → Folder: `/ (root)`
+3. Confirm custom domain field shows `rk-empires.com` (CNAME file already in repo)
+4. Wait for DNS propagation — site goes live at `https://rk-empires.com/`
+
+### Netlify (alternative)
+1. Connect `Raiven025/RK-Empires-Intelligent-Automations` repo in Netlify dashboard
+2. **Publish directory:** `/` — **Build command:** *(leave empty)*
+3. Add custom domain `rk-empires.com` under Domain Settings
 
 ### Vercel
 1. Push project root to GitHub

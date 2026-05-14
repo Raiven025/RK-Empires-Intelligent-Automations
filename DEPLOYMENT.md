@@ -84,9 +84,9 @@ Domain replacement is **complete**. Detected from `CNAME` file: `rk-empires.com`
 |---|---|---|---|
 | `index.html` | 12 | `<link rel="canonical">` `href` | `https://rk-empires.com/` |
 | `index.html` | 18 | `<meta property="og:url">` `content` | `https://rk-empires.com/` |
-| `index.html` | 21 | `<meta property="og:image">` `content` | `https://rk-empires.com/og-image.jpg` |
+| `index.html` | 21 | `<meta property="og:image">` `content` | `https://rk-empires.com/assets/images/og-image.jpg` |
 | `index.html` | 25 | `<meta name="twitter:url">` `content` | `https://rk-empires.com/` |
-| `index.html` | 28 | `<meta name="twitter:image">` `content` | `https://rk-empires.com/og-image.jpg` |
+| `index.html` | 28 | `<meta name="twitter:image">` `content` | `https://rk-empires.com/assets/images/og-image.jpg` |
 | `index.html` | 36 | JSON-LD `"url"` | `https://rk-empires.com/` |
 | `robots.txt` | 4 | `Sitemap:` directive | `https://rk-empires.com/sitemap.xml` |
 | `sitemap.xml` | 4 | `<loc>` | `https://rk-empires.com/` |
@@ -186,12 +186,13 @@ Run this after the site goes live at the real URL.
 
 | Priority | Action |
 |---|---|
-| **Required** | Replace 8 `rk-empires.com` placeholder values (see table above) |
+| ✅ Done | Domain `rk-empires.com` set in all 8 metadata fields |
+| ✅ Done | OG image path corrected to `https://rk-empires.com/assets/images/og-image.jpg` |
+| ✅ Done | CNAME file present — `rk-empires.com` ready for GitHub Pages |
 | **Required** | Create `assets/images/favicon.ico` (32×32) |
 | **Required** | Create `assets/images/apple-touch-icon.png` (180×180) |
 | **Required** | Create `assets/images/og-image.jpg` (1200×630 — see OG brief above) |
-| **Required** | Choose deployment platform and connect repo |
-| **Required** | Run Post-Deploy QA Checklist after first deploy |
-| **Recommended** | Submit sitemap to Google Search Console after domain is live |
-| **Recommended** | Test OG preview with opengraph.xyz after OG image is uploaded |
-| **Optional** | Set up Netlify / Vercel email notifications for deploy failures |
+| **Required** | Verify GitHub Pages is serving `https://rk-empires.com/` (Settings → Pages) |
+| **Required** | Run Post-Deploy QA Checklist after confirming live URL |
+| **Recommended** | Submit `https://rk-empires.com/sitemap.xml` to Google Search Console |
+| **Recommended** | Test OG preview at [opengraph.xyz](https://www.opengraph.xyz) after OG image is uploaded |
