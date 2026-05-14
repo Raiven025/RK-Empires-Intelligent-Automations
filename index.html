@@ -65,7 +65,7 @@
     <li><a href="#audit">Audit</a></li>
     <li><a href="#booking">Book a Call</a></li>
   </ul>
-  <a href="#contact" class="nav-cta"><span>Get Started</span></a>
+  <a href="#contact" class="nav-cta" id="signin-trigger"><span>Get Started</span></a>
 </nav>
 
 <!-- HERO -->
@@ -472,6 +472,92 @@
 
 
 <script src="assets/js/main.js"></script>
+
+<!-- SIGN IN MODAL -->
+<div id="signin-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;">
+  <div id="signin-modal" style="position:relative;background:#0d1117;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:44px 40px 36px;width:100%;max-width:420px;box-shadow:0 24px 64px rgba(0,0,0,.6);">
+    <button id="signin-close" aria-label="Close" style="position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;line-height:1;">&times;</button>
+    <div style="font-size:20px;font-weight:800;letter-spacing:-.5px;color:#fff;margin-bottom:6px;">RK<span style="color:#00e5ff;">.</span>EMPIRES</div>
+    <h2 style="margin:0 0 4px;font-size:22px;font-weight:700;color:#fff;">Sign In</h2>
+    <p style="margin:0 0 28px;color:rgba(255,255,255,.45);font-size:14px;">Access your automation dashboard</p>
+    <form id="signin-form" novalidate>
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px;">Email</label>
+        <input id="signin-email" type="email" placeholder="you@rk-empires.com" autocomplete="email" required style="width:100%;padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;transition:border .2s;">
+      </div>
+      <div style="margin-bottom:24px;">
+        <label style="display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px;">Password</label>
+        <input id="signin-password" type="password" placeholder="••••••••" autocomplete="current-password" required style="width:100%;padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;transition:border .2s;">
+      </div>
+      <div id="signin-error" role="alert" style="display:none;background:rgba(255,68,68,.1);border:1px solid rgba(255,68,68,.3);border-radius:8px;padding:10px 14px;color:#ff6b6b;font-size:13px;margin-bottom:16px;"></div>
+      <button id="signin-submit" type="submit" style="width:100%;padding:13px;background:linear-gradient(135deg,#00e5ff,#0077ff);border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.02em;transition:opacity .2s;">Sign In &rarr;</button>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  var API = 'https://rk-empires-api-production.up.railway.app/api/v1';
+  var PLATFORM = 'https://rk-empires-platform.netlify.app';
+  var overlay = document.getElementById('signin-overlay');
+  var trigger = document.getElementById('signin-trigger');
+  var closeBtn = document.getElementById('signin-close');
+  var form = document.getElementById('signin-form');
+  var errBox = document.getElementById('signin-error');
+  var submitBtn = document.getElementById('signin-submit');
+
+  function openModal(e){
+    e.preventDefault();
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    document.getElementById('signin-email').focus();
+  }
+  function closeModal(){
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+    errBox.style.display = 'none';
+    form.reset();
+  }
+
+  trigger.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = document.getElementById('signin-email').value.trim();
+    var password = document.getElementById('signin-password').value;
+    errBox.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Signing in...';
+    fetch(API + '/auth/login', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      credentials: 'include',
+      body: JSON.stringify({email:email, password:password})
+    })
+    .then(function(r){ return r.json().then(function(d){ return {ok:r.ok,data:d}; }); })
+    .then(function(res){
+      if(!res.ok){
+        errBox.textContent = (res.data && res.data.message) || 'Invalid credentials.';
+        errBox.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign In \u2192';
+        return;
+      }
+      var token = res.data.data && res.data.data.accessToken;
+      window.location.href = PLATFORM + '/dashboard' + (token ? '#t=' + encodeURIComponent(token) : '');
+    })
+    .catch(function(){
+      errBox.textContent = 'Network error. Please try again.';
+      errBox.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Sign In \u2192';
+    });
+  });
+})();
+</script>
 
 
 <!-- Messenger Floating Button -->
