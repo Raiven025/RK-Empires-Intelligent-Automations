@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Access | RK Empires</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/images/favicon.ico" sizes="any">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5/400.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5/700.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5/800.css" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #060910;
+    --surface: #0d1117;
+    --border: rgba(255,255,255,.08);
+    --accent: #a78bfa;
+    --accent2: #7c3aed;
+    --text: #fff;
+    --muted: rgba(255,255,255,.45);
+    --error-bg: rgba(255,68,68,.1);
+    --error-border: rgba(255,68,68,.3);
+    --error-text: #ff6b6b;
+  }
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: .15;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orb1 { width: 500px; height: 500px; background: #7c3aed; top: -150px; right: -100px; }
+  .orb2 { width: 400px; height: 400px; background: #a78bfa; bottom: -120px; left: -80px; }
+
+  .back-link {
+    position: fixed;
+    top: 24px;
+    left: 28px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color .2s;
+    z-index: 10;
+  }
+  .back-link:hover { color: var(--text); }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px 44px 40px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 32px 80px rgba(0,0,0,.6);
+  }
+  .logo {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -.5px;
+    margin-bottom: 28px;
+    display: inline-block;
+  }
+  .logo span { color: var(--accent); }
+
+  .admin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(124,58,237,.15);
+    border: 1px solid rgba(167,139,250,.2);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+
+  .field { margin-bottom: 18px; }
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  input {
+    width: 100%;
+    padding: 13px 16px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color .2s, background .2s;
+  }
+  input:focus {
+    border-color: rgba(167,139,250,.4);
+    background: rgba(167,139,250,.04);
+  }
+  input::placeholder { color: rgba(255,255,255,.2); }
+
+  .error-box {
+    display: none;
+    background: var(--error-bg);
+    border: 1px solid var(--error-border);
+    border-radius: 8px;
+    padding: 11px 14px;
+    color: var(--error-text);
+    font-size: 13px;
+    margin-bottom: 18px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    letter-spacing: .02em;
+    transition: opacity .2s, transform .1s;
+    margin-top: 6px;
+  }
+  .btn:hover { opacity: .9; }
+  .btn:active { transform: scale(.99); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+  .back-to-login {
+    display: block;
+    text-align: center;
+    margin-top: 22px;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .back-to-login:hover { color: var(--text); }
+
+  @media (max-width: 480px) {
+    .card { padding: 36px 24px 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<a href="/" class="back-link">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+  Back to rk-empires.com
+</a>
+
+<div class="card">
+  <a href="/" class="logo">RK<span>.</span>EMPIRES</a>
+  <div class="admin-badge">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    Admin Access
+  </div>
+  <h1>Welcome back</h1>
+  <p class="subtitle">Sign in to your internal dashboard</p>
+
+  <form id="login-form" novalidate>
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="admin@rk-empires.com" autocomplete="email" required>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" required>
+    </div>
+    <div id="error-box" class="error-box" role="alert"></div>
+    <button id="submit-btn" class="btn" type="submit">Access Dashboard &rarr;</button>
+  </form>
+
+  <a href="/login" class="back-to-login">Not an admin? Regular sign in &rarr;</a>
+</div>
+
+<script>
+(function () {
+  var API = 'https://rk-empires-api-production.up.railway.app/api/v1';
+  var PLATFORM = 'https://app.rk-empires.com';
+
+  var form = document.getElementById('login-form');
+  var errBox = document.getElementById('error-box');
+  var btn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = document.getElementById('email').value.trim();
+    var password = document.getElementById('password').value;
+    errBox.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Signing in\u2026';
+
+    fetch(API + '/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ email: email, password: password })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+      .then(function (res) {
+        if (!res.ok) {
+          errBox.textContent = (res.data && res.data.message) || 'Invalid credentials.';
+          errBox.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Access Dashboard \u2192';
+          return;
+        }
+        var role = res.data.data && res.data.data.user && res.data.data.user.role;
+        if (role !== 'OWNER' && role !== 'ADMIN') {
+          errBox.textContent = 'Admin access only. Use the regular sign-in page.';
+          errBox.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Access Dashboard \u2192';
+          return;
+        }
+        var token = res.data.data && res.data.data.accessToken;
+        window.location.href = PLATFORM + '/dashboard' + (token ? '#t=' + encodeURIComponent(token) : '');
+      })
+      .catch(function () {
+        errBox.textContent = 'Network error. Please try again.';
+        errBox.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Access Dashboard \u2192';
+      });
+  });
+})();
+</script>
+</body>
+</html>
