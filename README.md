@@ -73,16 +73,16 @@ Domain replacement is **complete**. Detected from `CNAME`: `rk-empires.com`
 
 > Update `<lastmod>` in `sitemap.xml` to today’s date when you deploy.
 
-### Image files to create (see Required Image Assets below)
-- [ ] `assets/images/favicon.ico`
-- [ ] `assets/images/apple-touch-icon.png`
-- [ ] `assets/images/og-image.jpg`
+### Image files
+- [x] `assets/images/favicon.ico` — generated (32×32 PNG-in-ICO)
+- [x] `assets/images/apple-touch-icon.png` — generated (180×180 PNG)
+- [x] `assets/images/og-image.jpg` — generated (1200×630 JPEG)
 
 ---
 
 ## Required Image Assets
 
-Three image files are referenced in `index.html` but not yet created. Generate or design these before deploying:
+Three image files are referenced in `index.html`. All have been generated and committed. Replace with custom branded versions any time before or after launch.
 
 | File | Size | Format | Purpose |
 |---|---|---|---|
@@ -184,9 +184,9 @@ Run through this list once before making the site public. Use a local server (`L
 
 ### Domain & Metadata (pre-launch only)
 - [x] Domain set to `rk-empires.com` — all 8 metadata fields updated
-- [ ] `assets/images/favicon.ico` created and placed
-- [ ] `assets/images/apple-touch-icon.png` created and placed
-- [ ] `assets/images/og-image.jpg` created and placed
+- [x] `assets/images/favicon.ico` — generated and committed
+- [x] `assets/images/apple-touch-icon.png` — generated and committed
+- [x] `assets/images/og-image.jpg` — generated and committed
 - [ ] OG/Twitter preview tested via [opengraph.xyz](https://www.opengraph.xyz) or [cards-dev.twitter.com](https://cards-dev.twitter.com/validator)
 
 ---
@@ -197,7 +197,7 @@ This is a plain static site — no build step required.
 
 ### Pre-deployment checklist
 - [x] Domain replacement complete — live domain `rk-empires.com` set in all files
-- [ ] Create and upload `assets/images/favicon.ico`, `apple-touch-icon.png`, `og-image.jpg`
+- [x] Image assets generated and committed (`favicon.ico`, `apple-touch-icon.png`, `og-image.jpg`)
 - [x] `og:image` and `twitter:image` updated to `https://rk-empires.com/assets/images/og-image.jpg`
 - [ ] Verify Web3Forms access key is active at [web3forms.com](https://web3forms.com)
 - [ ] Test the contact form from the **deployed URL** (not `localhost`) after going live
