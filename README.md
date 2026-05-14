@@ -56,18 +56,36 @@ Then open `http://localhost:8080`
 
 ---
 
-## Placeholders to Replace Before Going Live
+## Domain Replacement Checklist
 
-### In `index.html`
-- [ ] `https://your-domain.com/` — canonical URL, `og:url`, `twitter:url`, JSON-LD `url` (6 occurrences — search `your-domain.com`)
-- [ ] `https://your-domain.com/og-image.jpg` — `og:image` and `twitter:image` (2 occurrences)
+**8 real placeholder values** must be replaced across 3 files before going live. The README itself also references `your-domain.com` as documentation — those do not need changing.
 
-### In `robots.txt`
-- [ ] `https://your-domain.com/sitemap.xml` — replace with your real domain
+Quick find: search `your-domain.com` across the project. You will get exactly 8 hits in source files.
 
-### In `sitemap.xml`
-- [ ] `https://your-domain.com/` — replace with your real domain
-- [ ] `<lastmod>2026-05-14</lastmod>` — update when content changes
+### `index.html` — 6 occurrences
+
+| Line | Tag / Attribute | Current placeholder |
+|---|---|---|
+| 12 | `<link rel="canonical">` → `href` | `https://your-domain.com/` |
+| 18 | `<meta property="og:url">` → `content` | `https://your-domain.com/` |
+| 21 | `<meta property="og:image">` → `content` | `https://your-domain.com/og-image.jpg` |
+| 25 | `<meta name="twitter:url">` → `content` | `https://your-domain.com/` |
+| 28 | `<meta name="twitter:image">` → `content` | `https://your-domain.com/og-image.jpg` |
+| 36 | JSON-LD `"url"` field | `https://your-domain.com/` |
+
+### `robots.txt` — 1 occurrence
+
+| Line | Field | Current placeholder |
+|---|---|---|
+| 4 | `Sitemap:` directive | `https://your-domain.com/sitemap.xml` |
+
+### `sitemap.xml` — 1 occurrence
+
+| Line | Field | Current placeholder |
+|---|---|---|
+| 4 | `<loc>` | `https://your-domain.com/` |
+
+> Also update `<lastmod>2026-05-14</lastmod>` in `sitemap.xml` to reflect the date of your last content change.
 
 ### Image files to create (see Required Image Assets below)
 - [ ] `assets/images/favicon.ico`
@@ -86,9 +104,29 @@ Three image files are referenced in `index.html` but not yet created. Generate o
 | `assets/images/apple-touch-icon.png` | 180×180 px | PNG | iOS/Android home screen icon |
 | `assets/images/og-image.jpg` | 1200×630 px | JPG | Social share preview (Facebook, LinkedIn, X) |
 
-**Recommended OG image content:** Brand name + tagline on the dark cyber background (matching site theme). Text: *"RK Empires Intelligent Automations — AI-Powered Business Automation"*.
+### OG Image Design Brief
 
-> Until these files exist, the browser tab will show a default icon and social shares will show no preview image. The page itself will render and function normally.
+| Property | Value |
+|---|---|
+| **Text line 1** | RK Empires Intelligent Automations |
+| **Text line 2** | AI Automation Systems for Growing Businesses |
+| **Background** | Dark navy/black (`#040810`) matching site theme |
+| **Accent colour** | Cyan `#00d4ff` for text highlights or borders |
+| **Style** | Cyber / AI tech — grid lines, particle dots, or gradient glows |
+| **Readable at** | 600×315 px thumbnail (Facebook/LinkedIn preview size) |
+
+Free tools to create this: [Canva](https://canva.com) (custom size 1200×630), [Figma](https://figma.com), or any image editor. Export as `.jpg` at 80–90% quality.
+
+### Expected 404s Until Images Are Created
+
+Until the three image files are placed in `assets/images/`, the browser will log these **expected and harmless** 404 errors in the Network tab:
+
+```
+GET /assets/images/favicon.ico       404
+GET /assets/images/apple-touch-icon.png  404
+```
+
+The `og-image.jpg` 404 is silent (not fetched by the browser at page load — only by social crawlers). **The page renders and all functionality works normally without these files.**
 
 ---
 
@@ -120,6 +158,50 @@ Three image files are referenced in `index.html` but not yet created. Generate o
 - [ ] All `.reveal` elements visible immediately
 - [ ] Custom cursor hidden
 - [ ] Canvas particle background hidden
+
+---
+
+## Final Pre-Deploy Checklist
+
+Run through this list once before making the site public. Use a local server (`Live Server` or `python -m http.server 8080`) — not `file:///`.
+
+### Files & Network
+- [ ] Local server is running
+- [ ] `assets/css/styles.css` returns **200** in DevTools → Network tab
+- [ ] `assets/js/main.js` returns **200** in DevTools → Network tab
+- [ ] `robots.txt` is accessible at `http://localhost:8080/robots.txt`
+- [ ] `sitemap.xml` is accessible at `http://localhost:8080/sitemap.xml`
+- [ ] Browser console shows **zero errors** on page load
+
+### Navigation & Links
+- [ ] All nav anchors scroll to correct sections: `#about` `#services` `#portfolio` `#audit` `#booking` `#contact`
+- [ ] All footer anchors scroll to correct sections
+- [ ] All `target="_blank"` external links have `rel="noopener noreferrer"` *(already verified in QA pass)*
+- [ ] All Calendly links open `https://calendly.com/rk-empires01/30min` in a new tab
+- [ ] Facebook / Messenger links open the correct Facebook page
+- [ ] LinkedIn link opens the correct profile
+
+### Forms & Integrations
+- [ ] Contact form: fill Name + Email + Message → **Send Message** → success banner appears
+- [ ] Contact form: submit without Message → browser blocks it (required field)
+- [ ] Web3Forms email received in inbox after test submission
+- [ ] WhatsApp button on **mobile**: opens `wa.me/639485609968`
+- [ ] WhatsApp button on **desktop**: shows mobile-only notice
+
+### Accessibility & Responsive
+- [ ] Tab key navigates through page — cyan focus ring visible on all interactive elements
+- [ ] Press `Enter` or `Space` on the WhatsApp button — triggers handler
+- [ ] DevTools → Rendering → `prefers-reduced-motion: reduce` → no animations, cursor hidden, canvas hidden, all `.reveal` content visible
+- [ ] DevTools → device toolbar → **390px** — nav collapses, audit cards stack, Messenger button is circle
+- [ ] DevTools → device toolbar → **768px** — two-column layouts transition correctly
+- [ ] Desktop — custom cursor visible and tracking
+
+### Domain & Metadata (pre-launch only)
+- [ ] All `your-domain.com` placeholders replaced with real domain (8 occurrences — see Domain Replacement Checklist above)
+- [ ] `assets/images/favicon.ico` created and placed
+- [ ] `assets/images/apple-touch-icon.png` created and placed
+- [ ] `assets/images/og-image.jpg` created and placed
+- [ ] OG/Twitter preview tested via [opengraph.xyz](https://www.opengraph.xyz) or [cards-dev.twitter.com](https://cards-dev.twitter.com/validator)
 
 ---
 
@@ -180,3 +262,4 @@ This is a plain static site — no build step required.
 | Phase 2 | Refactored into `/assets/css/styles.css` + `/assets/js/main.js` structure |
 | Phase 2 QA | Regression pass — zero issues found, all checks passed |
 | Phase 3 | Added favicon/apple-touch-icon refs, created `robots.txt` + `sitemap.xml`, fixed JSON-LD URL trailing slash, expanded README with deployment checklists and security notes |
+| Phase 4 | Domain replacement checklist (8 fields across 3 files), OG image design brief, 404 explanation for missing assets, Final Pre-Deploy Checklist with all launch criteria |
