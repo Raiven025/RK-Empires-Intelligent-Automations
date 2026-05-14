@@ -1,4 +1,4 @@
-# RK Empires — Deployment Runbook
+﻿# RK Empires — Deployment Runbook
 
 Quick-reference launch guide. For full project documentation see `README.md`.
 
@@ -74,43 +74,24 @@ This is a **plain static site** — no build step, no framework, no dependencies
 
 ---
 
-## When Real Domain Is Ready
+## Live Domain — Confirmed
 
-Replace **8 placeholder values** across 3 files. Do not push the changes until the domain is live and DNS is pointed at the host.
+Domain replacement is **complete**. Detected from `CNAME` file: `rk-empires.com`
 
-### `index.html` — 6 replacements
+### Live values set in source files
 
-| Line | Field | Replace |
-|---|---|---|
-| 12 | `<link rel="canonical">` `href` | `https://your-domain.com/` → `https://yourdomain.com/` |
-| 18 | `<meta property="og:url">` `content` | `https://your-domain.com/` → `https://yourdomain.com/` |
-| 21 | `<meta property="og:image">` `content` | `https://your-domain.com/og-image.jpg` → `https://yourdomain.com/og-image.jpg` |
-| 25 | `<meta name="twitter:url">` `content` | `https://your-domain.com/` → `https://yourdomain.com/` |
-| 28 | `<meta name="twitter:image">` `content` | `https://your-domain.com/og-image.jpg` → `https://yourdomain.com/og-image.jpg` |
-| 36 | JSON-LD `"url"` | `https://your-domain.com/` → `https://yourdomain.com/` |
+| File | Line | Field | Live value |
+|---|---|---|---|
+| `index.html` | 12 | `<link rel="canonical">` `href` | `https://rk-empires.com/` |
+| `index.html` | 18 | `<meta property="og:url">` `content` | `https://rk-empires.com/` |
+| `index.html` | 21 | `<meta property="og:image">` `content` | `https://rk-empires.com/og-image.jpg` |
+| `index.html` | 25 | `<meta name="twitter:url">` `content` | `https://rk-empires.com/` |
+| `index.html` | 28 | `<meta name="twitter:image">` `content` | `https://rk-empires.com/og-image.jpg` |
+| `index.html` | 36 | JSON-LD `"url"` | `https://rk-empires.com/` |
+| `robots.txt` | 4 | `Sitemap:` directive | `https://rk-empires.com/sitemap.xml` |
+| `sitemap.xml` | 4 | `<loc>` | `https://rk-empires.com/` |
 
-### `robots.txt` — 1 replacement
-
-| Line | Field | Replace |
-|---|---|---|
-| 4 | `Sitemap:` | `https://your-domain.com/sitemap.xml` → `https://yourdomain.com/sitemap.xml` |
-
-### `sitemap.xml` — 1 replacement
-
-| Line | Field | Replace |
-|---|---|---|
-| 4 | `<loc>` | `https://your-domain.com/` → `https://yourdomain.com/` |
-
-> Also update `<lastmod>` in `sitemap.xml` to the current date when you deploy.
-
-**Quick replace command (PowerShell — run after you know your real domain):**
-```powershell
-# Replace your-domain.com with your actual domain in all 3 files
-$domain = "yourdomain.com"
-foreach ($file in @("index.html","robots.txt","sitemap.xml")) {
-    (Get-Content $file) -replace "your-domain\.com", $domain | Set-Content $file
-}
-```
+> Update `<lastmod>` in `sitemap.xml` to today’s date when you deploy.
 
 ---
 
@@ -205,7 +186,7 @@ Run this after the site goes live at the real URL.
 
 | Priority | Action |
 |---|---|
-| **Required** | Replace 8 `your-domain.com` placeholder values (see table above) |
+| **Required** | Replace 8 `rk-empires.com` placeholder values (see table above) |
 | **Required** | Create `assets/images/favicon.ico` (32×32) |
 | **Required** | Create `assets/images/apple-touch-icon.png` (180×180) |
 | **Required** | Create `assets/images/og-image.jpg` (1200×630 — see OG brief above) |

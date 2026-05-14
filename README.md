@@ -1,4 +1,4 @@
-# RK Empires Intelligent Automations
+﻿# RK Empires Intelligent Automations
 
 AI-powered automation services landing page for Raiven Kaizer Moreno. Custom workflows, chatbots, and system integrations — delivered remotely, worldwide.
 
@@ -56,36 +56,22 @@ Then open `http://localhost:8080`
 
 ---
 
-## Domain Replacement Checklist
+## Live Domain
 
-**8 real placeholder values** must be replaced across 3 files before going live. The README itself also references `your-domain.com` as documentation — those do not need changing.
+Domain replacement is **complete**. Detected from `CNAME`: `rk-empires.com`
 
-Quick find: search `your-domain.com` across the project. You will get exactly 8 hits in source files.
+| File | Line | Field | Live value |
+|---|---|---|---|
+| `index.html` | 12 | `<link rel="canonical">` `href` | `https://rk-empires.com/` |
+| `index.html` | 18 | `<meta property="og:url">` `content` | `https://rk-empires.com/` |
+| `index.html` | 21 | `<meta property="og:image">` `content` | `https://rk-empires.com/og-image.jpg` |
+| `index.html` | 25 | `<meta name="twitter:url">` `content` | `https://rk-empires.com/` |
+| `index.html` | 28 | `<meta name="twitter:image">` `content` | `https://rk-empires.com/og-image.jpg` |
+| `index.html` | 36 | JSON-LD `"url"` | `https://rk-empires.com/` |
+| `robots.txt` | 4 | `Sitemap:` directive | `https://rk-empires.com/sitemap.xml` |
+| `sitemap.xml` | 4 | `<loc>` | `https://rk-empires.com/` |
 
-### `index.html` — 6 occurrences
-
-| Line | Tag / Attribute | Current placeholder |
-|---|---|---|
-| 12 | `<link rel="canonical">` → `href` | `https://your-domain.com/` |
-| 18 | `<meta property="og:url">` → `content` | `https://your-domain.com/` |
-| 21 | `<meta property="og:image">` → `content` | `https://your-domain.com/og-image.jpg` |
-| 25 | `<meta name="twitter:url">` → `content` | `https://your-domain.com/` |
-| 28 | `<meta name="twitter:image">` → `content` | `https://your-domain.com/og-image.jpg` |
-| 36 | JSON-LD `"url"` field | `https://your-domain.com/` |
-
-### `robots.txt` — 1 occurrence
-
-| Line | Field | Current placeholder |
-|---|---|---|
-| 4 | `Sitemap:` directive | `https://your-domain.com/sitemap.xml` |
-
-### `sitemap.xml` — 1 occurrence
-
-| Line | Field | Current placeholder |
-|---|---|---|
-| 4 | `<loc>` | `https://your-domain.com/` |
-
-> Also update `<lastmod>2026-05-14</lastmod>` in `sitemap.xml` to reflect the date of your last content change.
+> Update `<lastmod>` in `sitemap.xml` to today’s date when you deploy.
 
 ### Image files to create (see Required Image Assets below)
 - [ ] `assets/images/favicon.ico`
@@ -197,7 +183,7 @@ Run through this list once before making the site public. Use a local server (`L
 - [ ] Desktop — custom cursor visible and tracking
 
 ### Domain & Metadata (pre-launch only)
-- [ ] All `your-domain.com` placeholders replaced with real domain (8 occurrences — see Domain Replacement Checklist above)
+- [x] Domain set to `rk-empires.com` — all 8 metadata fields updated
 - [ ] `assets/images/favicon.ico` created and placed
 - [ ] `assets/images/apple-touch-icon.png` created and placed
 - [ ] `assets/images/og-image.jpg` created and placed
@@ -210,7 +196,7 @@ Run through this list once before making the site public. Use a local server (`L
 This is a plain static site — no build step required.
 
 ### Pre-deployment checklist
-- [ ] Replace all `https://your-domain.com/` placeholders in `index.html`, `robots.txt`, `sitemap.xml`
+- [x] Domain replacement complete — live domain `rk-empires.com` set in all files
 - [ ] Create and upload `assets/images/favicon.ico`, `apple-touch-icon.png`, `og-image.jpg`
 - [ ] Update `og:image` and `twitter:image` URLs to point to the deployed OG image
 - [ ] Verify Web3Forms access key is active at [web3forms.com](https://web3forms.com)
