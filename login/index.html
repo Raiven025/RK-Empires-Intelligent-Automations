@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign In | RK Empires</title>
+<title>Client Portal | RK Empires</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="/assets/images/favicon.ico" sizes="any">
 <link href="https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5/400.css" rel="stylesheet">
@@ -15,8 +15,8 @@
     --bg: #060910;
     --surface: #0d1117;
     --border: rgba(255,255,255,.08);
-    --accent: #00e5ff;
-    --accent2: #0077ff;
+    --accent: #10b981;
+    --accent2: #059669;
     --text: #fff;
     --muted: rgba(255,255,255,.45);
     --error-bg: rgba(255,68,68,.1);
@@ -49,8 +49,8 @@
     pointer-events: none;
     z-index: 0;
   }
-  .orb1 { width: 500px; height: 500px; background: #00e5ff; top: -150px; right: -100px; }
-  .orb2 { width: 400px; height: 400px; background: #0077ff; bottom: -120px; left: -80px; }
+  .orb1 { width: 500px; height: 500px; background: #10b981; top: -150px; right: -100px; }
+  .orb2 { width: 400px; height: 400px; background: #059669; bottom: -120px; left: -80px; }
 
   /* Back link */
   .back-link {
@@ -115,8 +115,8 @@
     transition: border-color .2s, background .2s;
   }
   input:focus {
-    border-color: rgba(0,229,255,.4);
-    background: rgba(0,229,255,.04);
+    border-color: rgba(16,185,129,.4);
+    background: rgba(16,185,129,.04);
   }
   input::placeholder { color: rgba(255,255,255,.2); }
 
@@ -150,6 +150,37 @@
   .btn:active { transform: scale(.99); }
   .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
 
+  .features {
+    margin: 28px 0 0;
+    padding: 20px;
+    background: rgba(16,185,129,.06);
+    border: 1px solid rgba(16,185,129,.15);
+    border-radius: 12px;
+  }
+  .features-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: rgba(255,255,255,.6);
+    margin-bottom: 8px;
+  }
+  .feature-item:last-child { margin-bottom: 0; }
+  .feature-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
   .admin-link {
     display: block;
     text-align: center;
@@ -158,7 +189,7 @@
     color: var(--muted);
   }
   .admin-link a {
-    color: rgba(0,229,255,.7);
+    color: rgba(16,185,129,.7);
     text-decoration: none;
     transition: color .2s;
   }
@@ -180,8 +211,8 @@
 
 <div class="card">
   <a href="/" class="logo">RK<span>.</span>EMPIRES</a>
-  <h1>Sign In</h1>
-  <p class="subtitle">Access your automation dashboard</p>
+  <h1>Client Portal</h1>
+  <p class="subtitle">Sign in to track your automation projects</p>
 
   <form id="login-form" novalidate>
     <div class="field">
@@ -193,10 +224,17 @@
       <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" required>
     </div>
     <div id="error-box" class="error-box" role="alert"></div>
-    <button id="submit-btn" class="btn" type="submit">Sign In &rarr;</button>
+    <button id="submit-btn" class="btn" type="submit">Enter Client Portal &rarr;</button>
   </form>
 
-  <p class="admin-link">Internal admin? <a href="/admin/login">Admin access &rarr;</a></p>
+  <div class="features">
+    <div class="features-title">What you can access</div>
+    <div class="feature-item"><span class="feature-dot"></span>Live status of your automation workflows</div>
+    <div class="feature-item"><span class="feature-dot"></span>Integration health and activity logs</div>
+    <div class="feature-item"><span class="feature-dot"></span>Project updates and reports</div>
+  </div>
+
+  <p class="admin-link">RK Empires team? <a href="/admin/login">Admin access &rarr;</a></p>
 </div>
 
 <script>
@@ -214,7 +252,7 @@
     var password = document.getElementById('password').value;
     errBox.style.display = 'none';
     btn.disabled = true;
-    btn.textContent = 'Signing in\u2026';
+    btn.textContent = 'Entering portal\u2026';
 
     fetch(API + '/auth/login', {
       method: 'POST',
@@ -228,7 +266,7 @@
           errBox.textContent = (res.data && res.data.message) || 'Invalid credentials.';
           errBox.style.display = 'block';
           btn.disabled = false;
-          btn.textContent = 'Sign In \u2192';
+          btn.textContent = 'Enter Client Portal \u2192';
           return;
         }
         var token = res.data.data && res.data.data.accessToken;
@@ -238,7 +276,7 @@
         errBox.textContent = 'Network error. Please try again.';
         errBox.style.display = 'block';
         btn.disabled = false;
-        btn.textContent = 'Sign In \u2192';
+        btn.textContent = 'Enter Client Portal \u2192';
       });
   });
 })();
