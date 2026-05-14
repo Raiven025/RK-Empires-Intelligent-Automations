@@ -8,15 +8,20 @@ AI-powered automation services landing page for Raiven Kaizer Moreno. Custom wor
 
 ```
 /
-├── index.html                  # Main HTML page (semantic, no inline styles or scripts)
+├── index.html                   # Main HTML page (semantic, no inline styles or scripts)
 ├── assets/
 │   ├── css/
-│   │   └── styles.css          # All page styles (extracted from inline <style>)
+│   │   └── styles.css           # All page styles (extracted from inline <style>)
 │   ├── js/
-│   │   └── main.js             # All page scripts (cursor, canvas, reveal, form, WhatsApp)
-│   └── images/                 # Static image assets (currently using inline base64 photo)
-├── index.html.bak              # Phase 1 original backup
-├── index.html.bak2             # Phase 2 pre-refactor backup
+│   │   └── main.js              # All page scripts (cursor, canvas, reveal, form, WhatsApp)
+│   └── images/
+│       ├── favicon.ico          # TODO: browser tab icon (32×32 .ico)
+│       ├── apple-touch-icon.png # TODO: iOS home screen icon (180×180 px PNG)
+│       └── og-image.jpg         # TODO: social share image (1200×630 px JPG)
+├── robots.txt                   # Search engine crawl rules
+├── sitemap.xml                  # XML sitemap for search engines
+├── index.html.bak               # Phase 1 original backup
+├── index.html.bak2              # Phase 2 pre-refactor backup
 └── README.md
 ```
 
@@ -53,11 +58,37 @@ Then open `http://localhost:8080`
 
 ## Placeholders to Replace Before Going Live
 
-- [ ] `https://your-domain.com/` — canonical URL, Open Graph `og:url`, Twitter `twitter:url`, JSON-LD `url`
-- [ ] `https://your-domain.com/og-image.jpg` — Open Graph `og:image` and Twitter `twitter:image` (recommended: 1200×630 px)
-- [ ] Replace `https://your-domain.com` in JSON-LD structured data block in `<head>`
+### In `index.html`
+- [ ] `https://your-domain.com/` — canonical URL, `og:url`, `twitter:url`, JSON-LD `url` (6 occurrences — search `your-domain.com`)
+- [ ] `https://your-domain.com/og-image.jpg` — `og:image` and `twitter:image` (2 occurrences)
 
-Search for `your-domain.com` in `index.html` to find all occurrences.
+### In `robots.txt`
+- [ ] `https://your-domain.com/sitemap.xml` — replace with your real domain
+
+### In `sitemap.xml`
+- [ ] `https://your-domain.com/` — replace with your real domain
+- [ ] `<lastmod>2026-05-14</lastmod>` — update when content changes
+
+### Image files to create (see Required Image Assets below)
+- [ ] `assets/images/favicon.ico`
+- [ ] `assets/images/apple-touch-icon.png`
+- [ ] `assets/images/og-image.jpg`
+
+---
+
+## Required Image Assets
+
+Three image files are referenced in `index.html` but not yet created. Generate or design these before deploying:
+
+| File | Size | Format | Purpose |
+|---|---|---|---|
+| `assets/images/favicon.ico` | 32×32 px | ICO | Browser tab icon |
+| `assets/images/apple-touch-icon.png` | 180×180 px | PNG | iOS/Android home screen icon |
+| `assets/images/og-image.jpg` | 1200×630 px | JPG | Social share preview (Facebook, LinkedIn, X) |
+
+**Recommended OG image content:** Brand name + tagline on the dark cyber background (matching site theme). Text: *"RK Empires Intelligent Automations — AI-Powered Business Automation"*.
+
+> Until these files exist, the browser tab will show a default icon and social shares will show no preview image. The page itself will render and function normally.
 
 ---
 
@@ -96,15 +127,47 @@ Search for `your-domain.com` in `index.html` to find all occurrences.
 
 This is a plain static site — no build step required.
 
-**Netlify / Vercel / GitHub Pages:**
-1. Push the project root to a repository
-2. Set publish directory to `/` (root)
-3. No build command needed
+### Pre-deployment checklist
+- [ ] Replace all `https://your-domain.com/` placeholders in `index.html`, `robots.txt`, `sitemap.xml`
+- [ ] Create and upload `assets/images/favicon.ico`, `apple-touch-icon.png`, `og-image.jpg`
+- [ ] Update `og:image` and `twitter:image` URLs to point to the deployed OG image
+- [ ] Verify Web3Forms access key is active at [web3forms.com](https://web3forms.com)
+- [ ] Test the contact form from the **deployed URL** (not `localhost`) after going live
 
-**Before deploying:**
-- Replace all `https://your-domain.com/` placeholders (see above)
-- Upload an OG image and update the `og:image` / `twitter:image` URLs
-- Verify the Web3Forms access key is still active
+### Netlify
+1. Push project root to GitHub
+2. Connect repo in Netlify dashboard
+3. **Publish directory:** `/` (or leave blank — root is default)
+4. **Build command:** *(leave empty — no build step)*
+5. Deploy. Custom domain can be configured under Domain Settings.
+
+### Vercel
+1. Push project root to GitHub
+2. Import project in Vercel dashboard
+3. **Framework Preset:** Other
+4. **Root Directory:** `./` (project root)
+5. **Build command:** *(leave empty)*
+6. **Output directory:** `./`
+7. Deploy.
+
+### GitHub Pages
+1. Go to repo **Settings → Pages**
+2. **Source:** Deploy from branch
+3. **Branch:** `main` / `(root)`
+4. Save — site publishes at `https://Raiven025.github.io/RK-Empires-Intelligent-Automations/`
+5. For a custom domain: add a `CNAME` file with your domain (already present in this repo)
+
+> **Web3Forms note:** After deploying, submit the contact form once from the live URL to confirm it routes to your inbox. Web3Forms free tier allows up to 250 submissions/month.
+
+---
+
+## Security & Privacy
+
+- **No secrets in this repo.** All values in `index.html` are public-facing by design.
+- **Web3Forms access key** (`access_key`) is intentionally embedded in the HTML form — Web3Forms is designed this way. Monitor your dashboard at [web3forms.com](https://web3forms.com) for unexpected submissions. Rotate the key if abuse is detected.
+- **Never place private API keys, database credentials, or service account tokens** in any frontend file (`index.html`, `assets/js/main.js`, etc.). Anything in these files is readable by any visitor.
+- **All external links** with `target="_blank"` must keep `rel="noopener noreferrer"` to prevent reverse tabnapping. This has been applied to all 10 external links.
+- **`robots.txt`** is public and tells search engines what to crawl. Do not list private paths here — listing them reveals their existence. This site has no private paths.
 
 ---
 
@@ -115,3 +178,5 @@ This is a plain static site — no build step required.
 | Phase 1 | SEO meta tags, Open Graph, Twitter/X card, JSON-LD, cursor/canvas accessibility guards, prefers-reduced-motion, Automation Audit section, contact form hardening, keyboard accessibility |
 | QA Pass | Added `rel="noopener noreferrer"` to all 10 external `target="_blank"` links |
 | Phase 2 | Refactored into `/assets/css/styles.css` + `/assets/js/main.js` structure |
+| Phase 2 QA | Regression pass — zero issues found, all checks passed |
+| Phase 3 | Added favicon/apple-touch-icon refs, created `robots.txt` + `sitemap.xml`, fixed JSON-LD URL trailing slash, expanded README with deployment checklists and security notes |
