@@ -8,3 +8,7 @@ Thumbs.db
 
 # Editor
 .vscode/
+
+# Nested project repos — managed independently
+rk-empires-platform/
+rk-empires-api/
