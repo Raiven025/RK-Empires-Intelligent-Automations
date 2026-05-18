@@ -12,19 +12,21 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --accent: #7c3aed;
-    --accent2: #6d28d9;
-    --text: #0f172a;
-    --muted: #64748b;
-    --subtle: #94a3b8;
-    --border: #e2e8f0;
-    --input-bg: #f8fafc;
-    --error-bg: #fef2f2;
-    --error-border: #fecaca;
-    --error-text: #ef4444;
+    --bg: #040810;
+    --bg2: #070d1a;
+    --accent: #00d4ff;
+    --accent2: #0066ff;
+    --accent3: #00ff88;
+    --text: #e8f0ff;
+    --muted: #5a7090;
+    --border: rgba(0,212,255,0.12);
+    --error-bg: rgba(255,68,68,.1);
+    --error-border: rgba(255,68,68,.3);
+    --error-text: #ff6b6b;
   }
   html, body {
     height: 100%;
+    background: var(--bg);
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     color: var(--text);
     -webkit-font-smoothing: antialiased;
@@ -38,18 +40,33 @@
     padding: 24px;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(145deg, #faf5ff 0%, #f5f3ff 25%, #f8fafc 60%, #eef2ff 100%);
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 0;
+    pointer-events: none;
   }
   .orb {
     position: fixed;
     border-radius: 50%;
-    filter: blur(100px);
+    filter: blur(80px);
     pointer-events: none;
     z-index: 0;
+    animation: drift 12s ease-in-out infinite;
   }
-  .orb1 { width: 600px; height: 600px; background: rgba(124,58,237,.1); top: -200px; right: -150px; }
-  .orb2 { width: 500px; height: 500px; background: rgba(99,102,241,.08); bottom: -180px; left: -120px; }
-  .orb3 { width: 300px; height: 300px; background: rgba(167,139,250,.07); top: 40%; left: 50%; transform: translate(-50%,-50%); }
+  .orb1 { width: 500px; height: 500px; background: rgba(0,100,255,.08); top: -100px; left: -150px; }
+  .orb2 { width: 400px; height: 400px; background: rgba(0,212,255,.06); top: 20%; right: -100px; animation-delay: -4s; }
+  .orb3 { width: 300px; height: 300px; background: rgba(0,255,136,.05); bottom: 10%; left: 30%; animation-delay: -8s; }
+  @keyframes drift {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33%      { transform: translate(30px,-40px) scale(1.05); }
+    66%      { transform: translate(-20px,30px) scale(0.95); }
+  }
 
   .back-link {
     position: fixed;
@@ -65,23 +82,23 @@
     transition: color .2s;
     z-index: 10;
   }
-  .back-link:hover { color: var(--text); }
+  .back-link:hover { color: var(--accent); }
 
   .card {
     position: relative;
     z-index: 1;
-    background: #ffffff;
+    background: var(--bg2);
     border: 1px solid var(--border);
-    border-radius: 24px;
+    border-radius: 4px;
     padding: 48px 44px 40px;
     width: 100%;
     max-width: 440px;
-    box-shadow: 0 4px 6px rgba(0,0,0,.03), 0 20px 60px rgba(124,58,237,.08), 0 40px 80px rgba(0,0,0,.06);
+    box-shadow: 0 32px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(0,212,255,.06);
   }
   .logo {
     font-size: 20px;
     font-weight: 800;
-    letter-spacing: -.5px;
+    letter-spacing: .08em;
     margin-bottom: 28px;
     display: inline-block;
     color: var(--text);
@@ -91,55 +108,66 @@
   .admin-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: linear-gradient(135deg, #faf5ff, #ede9fe);
-    border: 1px solid #ddd6fe;
-    border-radius: 20px;
-    padding: 5px 14px;
+    gap: 8px;
     font-size: 11px;
-    font-weight: 700;
-    color: #5b21b6;
-    letter-spacing: .06em;
+    letter-spacing: .2em;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    color: var(--accent);
+    border: 1px solid rgba(0,212,255,.25);
+    padding: 8px 20px;
+    margin-bottom: 20px;
+  }
+  .admin-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(0,212,255,.4); }
+    50%     { opacity:.7; box-shadow: 0 0 0 6px rgba(0,212,255,0); }
   }
 
-  h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; color: var(--text); letter-spacing: -.4px; }
-  .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 32px; line-height: 1.5; }
+  h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; letter-spacing: -.03em; }
+  h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 32px; line-height: 1.6; }
 
   .field { margin-bottom: 18px; }
   label {
     display: block;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--muted);
-    letter-spacing: .04em;
+    letter-spacing: .08em;
+    text-transform: uppercase;
     margin-bottom: 8px;
   }
   input {
     width: 100%;
     padding: 13px 16px;
-    background: var(--input-bg);
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--border);
+    border-radius: 4px;
     color: var(--text);
     font-size: 14px;
     font-family: inherit;
     outline: none;
-    transition: border-color .2s, box-shadow .2s;
+    transition: border-color .2s, background .2s, box-shadow .2s;
   }
   input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(124,58,237,.12);
-    background: #fff;
+    border-color: rgba(0,212,255,.4);
+    background: rgba(0,212,255,.03);
+    box-shadow: 0 0 0 3px rgba(0,212,255,.08);
   }
-  input::placeholder { color: var(--subtle); }
+  input::placeholder { color: rgba(255,255,255,.2); }
 
   .error-box {
     display: none;
     background: var(--error-bg);
     border: 1px solid var(--error-border);
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 11px 14px;
     color: var(--error-text);
     font-size: 13px;
@@ -149,21 +177,21 @@
 
   .btn {
     width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    padding: 15px;
+    background: var(--accent);
     border: none;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
+    border-radius: 4px;
+    color: var(--bg);
+    font-size: 13px;
+    font-weight: 600;
     font-family: inherit;
     cursor: pointer;
-    letter-spacing: .02em;
-    transition: opacity .2s, transform .1s, box-shadow .2s;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    transition: background .2s, transform .1s, box-shadow .2s;
     margin-top: 6px;
-    box-shadow: 0 4px 15px rgba(124,58,237,.35);
   }
-  .btn:hover { opacity: .92; box-shadow: 0 6px 20px rgba(124,58,237,.45); transform: translateY(-1px); }
+  .btn:hover { background: #33ddff; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,212,255,.3); }
   .btn:active { transform: scale(.99) translateY(0); }
   .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
 
@@ -172,7 +200,7 @@
     text-align: center;
     margin-top: 22px;
     font-size: 12px;
-    color: var(--subtle);
+    color: var(--muted);
     text-decoration: none;
     font-weight: 500;
     transition: color .2s;
@@ -200,7 +228,7 @@
     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
     Admin Access
   </div>
-  <h1>Welcome back</h1>
+  <h1>Welcome <em>back</em></h1>
   <p class="subtitle">Sign in to your internal dashboard</p>
 
   <form id="login-form" novalidate>
