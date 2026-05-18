@@ -12,20 +12,19 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #060910;
-    --surface: #0d1117;
-    --border: rgba(255,255,255,.08);
-    --accent: #a78bfa;
-    --accent2: #7c3aed;
-    --text: #fff;
-    --muted: rgba(255,255,255,.45);
-    --error-bg: rgba(255,68,68,.1);
-    --error-border: rgba(255,68,68,.3);
-    --error-text: #ff6b6b;
+    --accent: #7c3aed;
+    --accent2: #6d28d9;
+    --text: #0f172a;
+    --muted: #64748b;
+    --subtle: #94a3b8;
+    --border: #e2e8f0;
+    --input-bg: #f8fafc;
+    --error-bg: #fef2f2;
+    --error-border: #fecaca;
+    --error-text: #ef4444;
   }
   html, body {
     height: 100%;
-    background: var(--bg);
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     color: var(--text);
     -webkit-font-smoothing: antialiased;
@@ -39,17 +38,18 @@
     padding: 24px;
     position: relative;
     overflow: hidden;
+    background: linear-gradient(145deg, #faf5ff 0%, #f5f3ff 25%, #f8fafc 60%, #eef2ff 100%);
   }
   .orb {
     position: fixed;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: .15;
+    filter: blur(100px);
     pointer-events: none;
     z-index: 0;
   }
-  .orb1 { width: 500px; height: 500px; background: #7c3aed; top: -150px; right: -100px; }
-  .orb2 { width: 400px; height: 400px; background: #a78bfa; bottom: -120px; left: -80px; }
+  .orb1 { width: 600px; height: 600px; background: rgba(124,58,237,.1); top: -200px; right: -150px; }
+  .orb2 { width: 500px; height: 500px; background: rgba(99,102,241,.08); bottom: -180px; left: -120px; }
+  .orb3 { width: 300px; height: 300px; background: rgba(167,139,250,.07); top: 40%; left: 50%; transform: translate(-50%,-50%); }
 
   .back-link {
     position: fixed;
@@ -70,13 +70,13 @@
   .card {
     position: relative;
     z-index: 1;
-    background: var(--surface);
+    background: #ffffff;
     border: 1px solid var(--border);
-    border-radius: 20px;
+    border-radius: 24px;
     padding: 48px 44px 40px;
     width: 100%;
     max-width: 440px;
-    box-shadow: 0 32px 80px rgba(0,0,0,.6);
+    box-shadow: 0 4px 6px rgba(0,0,0,.03), 0 20px 60px rgba(124,58,237,.08), 0 40px 80px rgba(0,0,0,.06);
   }
   .logo {
     font-size: 20px;
@@ -84,6 +84,7 @@
     letter-spacing: -.5px;
     margin-bottom: 28px;
     display: inline-block;
+    color: var(--text);
   }
   .logo span { color: var(--accent); }
 
@@ -91,48 +92,48 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(124,58,237,.15);
-    border: 1px solid rgba(167,139,250,.2);
+    background: linear-gradient(135deg, #faf5ff, #ede9fe);
+    border: 1px solid #ddd6fe;
     border-radius: 20px;
-    padding: 4px 12px;
+    padding: 5px 14px;
     font-size: 11px;
     font-weight: 700;
-    color: var(--accent);
+    color: #5b21b6;
     letter-spacing: .06em;
     text-transform: uppercase;
     margin-bottom: 16px;
   }
 
-  h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
-  .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; color: var(--text); letter-spacing: -.4px; }
+  .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 32px; line-height: 1.5; }
 
   .field { margin-bottom: 18px; }
   label {
     display: block;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 600;
     color: var(--muted);
-    letter-spacing: .08em;
-    text-transform: uppercase;
+    letter-spacing: .04em;
     margin-bottom: 8px;
   }
   input {
     width: 100%;
     padding: 13px 16px;
-    background: rgba(255,255,255,.05);
-    border: 1px solid var(--border);
+    background: var(--input-bg);
+    border: 1.5px solid var(--border);
     border-radius: 10px;
     color: var(--text);
     font-size: 14px;
     font-family: inherit;
     outline: none;
-    transition: border-color .2s, background .2s;
+    transition: border-color .2s, box-shadow .2s;
   }
   input:focus {
-    border-color: rgba(167,139,250,.4);
-    background: rgba(167,139,250,.04);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(124,58,237,.12);
+    background: #fff;
   }
-  input::placeholder { color: rgba(255,255,255,.2); }
+  input::placeholder { color: var(--subtle); }
 
   .error-box {
     display: none;
@@ -143,12 +144,13 @@
     color: var(--error-text);
     font-size: 13px;
     margin-bottom: 18px;
+    font-weight: 500;
   }
 
   .btn {
     width: 100%;
     padding: 14px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
     border: none;
     border-radius: 10px;
     color: #fff;
@@ -157,23 +159,25 @@
     font-family: inherit;
     cursor: pointer;
     letter-spacing: .02em;
-    transition: opacity .2s, transform .1s;
+    transition: opacity .2s, transform .1s, box-shadow .2s;
     margin-top: 6px;
+    box-shadow: 0 4px 15px rgba(124,58,237,.35);
   }
-  .btn:hover { opacity: .9; }
-  .btn:active { transform: scale(.99); }
-  .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+  .btn:hover { opacity: .92; box-shadow: 0 6px 20px rgba(124,58,237,.45); transform: translateY(-1px); }
+  .btn:active { transform: scale(.99) translateY(0); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
 
   .back-to-login {
     display: block;
     text-align: center;
     margin-top: 22px;
     font-size: 12px;
-    color: var(--muted);
+    color: var(--subtle);
     text-decoration: none;
+    font-weight: 500;
     transition: color .2s;
   }
-  .back-to-login:hover { color: var(--text); }
+  .back-to-login:hover { color: var(--accent); }
 
   @media (max-width: 480px) {
     .card { padding: 36px 24px 28px; }
@@ -183,6 +187,7 @@
 <body>
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
+<div class="orb orb3"></div>
 
 <a href="/" class="back-link">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
