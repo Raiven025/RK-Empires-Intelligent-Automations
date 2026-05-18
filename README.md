@@ -27,6 +27,14 @@ AI-powered automation services landing page for Raiven Kaizer Moreno. Custom wor
 
 ---
 
+## Repository Boundaries
+
+- This root repo is the static marketing site.
+- `rk-empires-platform/` (frontend app) and `rk-empires-api/` (backend app) are separate projects.
+- They are intentionally excluded by root `.gitignore` and managed independently.
+
+---
+
 ## Local Preview
 
 ### Option 1 — VS Code Live Server (recommended)
