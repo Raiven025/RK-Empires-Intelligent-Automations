@@ -10,6 +10,8 @@ Static marketing site for RK Empires Intelligent Automations, live at **https://
 
 Two nested directories are **separate git repositories**, excluded by the root `.gitignore` and managed independently. Never commit their files from this repo; run git commands inside those directories instead.
 
+The `.gitignore` patterns for them are root-anchored (`/rk-empires-platform/`, `/rk-empires-api/`) on purpose — unanchored patterns would also ignore same-named site paths like `portfolio/rk-empires-platform/`. Keep the leading slash.
+
 - `rk-empires-platform/` — platform frontend (React 18 + Vite, TailwindCSS, Zustand, React Router, Axios). Commands: `npm run dev`, `npm run build`, `npm run preview`.
 - `rk-empires-api/` — platform backend (Express + Prisma + PostgreSQL, JWT auth). Commands: `npm run dev` (nodemon), `npm start`, `npm run migrate`, `npm run seed`, `npm run studio`, `npm run generate`.
 
@@ -25,12 +27,15 @@ Or VS Code Live Server. **Do not open `index.html` as a `file:///` URL** — the
 
 ## Site Structure
 
-- `index.html` — the homepage (sections: `#about`, `#services`, `#testimonials`, `#audit`, `#booking`, `#stack`, `#contact`). Semantic HTML only — all styles live in `assets/css/styles.css` and all scripts in `assets/js/main.js`; do not add inline `<style>` or `<script>` blocks. Line 101 is a very long base64-embedded profile photo — never read/edit that line directly.
-- `portfolio/index.html` — dedicated portfolio page (`/portfolio/`), linked standalone from the nav. Features the brand identity project (logo + brand guidelines) first, then the automation case studies (RK Empires Platform, SubTrack) that used to live on the homepage. Shares `assets/css/styles.css` and `assets/js/main.js` (use absolute `/assets/...` paths from subpages).
-- `assets/js/main.js` — custom cursor, canvas particle background, scroll-reveal, contact form submission (Web3Forms), WhatsApp mobile/desktop handling.
+- `index.html` — the homepage (sections: `#about`, `#services`, `#pricing` (Packages), `#testimonials`, `#audit`, `#booking`, `#stack`, `#faq`, `#contact`). Semantic HTML only — all styles live in `assets/css/styles.css` and all scripts in `assets/js/main.js`; do not add inline `<style>` or `<script>` blocks (the two JSON-LD `application/ld+json` blocks in `<head>` — ProfessionalService and FAQPage — are data, not scripts, and are the allowed exception). Line 101 is a very long base64-embedded profile photo — never read/edit that line directly. Keep the FAQPage JSON-LD in sync with the visible `#faq` accordion content.
+- The Packages section (`#pricing`) deliberately has **no dollar prices** — tiers describe scope ("Single Workflow" / "Automation System" / "Full Operations") and every CTA routes to the free audit, matching the "custom quote for every project" positioning. Don't add prices without the owner providing them.
+- `portfolio/index.html` — dedicated portfolio page (`/portfolio/`), linked standalone from the nav. Features the brand identity project (logo + brand guidelines) first, then the automation case-study cards. Shares `assets/css/styles.css` and `assets/js/main.js` (use absolute `/assets/...` paths from subpages).
+- `portfolio/rk-empires-platform/index.html` and `portfolio/subtrack/index.html` — full case-study detail pages linked from the portfolio cards ("Read the full case study"). Results/metrics on these pages come only from copy that already existed on the site (testimonials, card impact lines) — don't invent new numbers.
+- `404.html` — branded not-found page, served automatically by GitHub Pages; `noindex`.
+- `assets/js/main.js` — custom cursor, canvas particle background, scroll-reveal, contact form submission (Web3Forms), WhatsApp mobile/desktop handling (on desktop, clicking the WhatsApp booking option reveals the `#wa-qr` QR code panel).
 - `login/index.html` and `admin/login/index.html` — standalone client/admin login pages styled to match the site theme.
-- `assets/images/` — brand assets: `rk-empires-logo.jpeg` (primary logo, 1254×1254), `rk-empires-brand-guidelines.png` (brand guidelines sheet — the design source of truth), `rk-empires-logo-192.png` (nav/login logo), plus `favicon.ico`, `apple-touch-icon.png`, and `og-image.jpg` all derived from the logo. If the logo changes, regenerate the derived files at the same names/sizes (Python + Pillow is available).
-- `robots.txt`, `sitemap.xml` — update `<lastmod>` in `sitemap.xml` when deploying; `sitemap.xml` lists `/` and `/portfolio/`.
+- `assets/images/` — brand assets: `rk-empires-logo.jpeg` (primary logo, 1254×1254) + `rk-empires-logo.webp`, `rk-empires-brand-guidelines.png` (brand guidelines sheet — the design source of truth) + `rk-empires-brand-guidelines.webp`, `rk-empires-logo-192.png` (nav/login logo), `whatsapp-qr.png` (encodes the wa.me link — regenerate if the WhatsApp number changes), plus `favicon.ico`, `apple-touch-icon.png`, and `og-image.jpg` (1200×630 social card: circular logo + Playfair/Montserrat text, generated with Pillow). If the logo changes, regenerate the derived files at the same names/sizes (Python + Pillow and the `qrcode` package are available). The big images are served via `<picture>` with WebP first, PNG/JPEG fallback.
+- `robots.txt`, `sitemap.xml` — update `<lastmod>` in `sitemap.xml` when deploying; `sitemap.xml` lists `/`, `/portfolio/`, and the two case-study pages.
 - `index.html.bak` / `index.html.bak2` — historical backups, gitignored; do not edit.
 
 ## Conventions & Gotchas

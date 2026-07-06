@@ -132,8 +132,11 @@ Run this after the site goes live at the real URL.
 - [ ] `https://yourdomain.com/sitemap.xml` loads correctly
 
 ### Navigation & CTAs
-- [ ] All nav anchors scroll to correct sections: `#about` `#services` `#audit` `#booking` `#contact`
-- [ ] Nav + footer **Portfolio** link opens `/portfolio/` and the page renders (logo, brand guidelines image, case studies)
+- [ ] All nav anchors scroll to correct sections: `#about` `#services` `#pricing` `#audit` `#booking` `#faq` `#contact`
+- [ ] Nav + footer **Portfolio** link opens `/portfolio/` and the page renders (logo, brand guidelines image, case study cards)
+- [ ] Case study pages load: `/portfolio/rk-empires-platform/` and `/portfolio/subtrack/`
+- [ ] FAQ accordion expands/collapses; WhatsApp QR appears when clicking the WhatsApp option on desktop
+- [ ] A bogus URL (e.g. `/nope`) shows the branded 404 page
 - [ ] All footer anchors work
 - [ ] All **Book a Free Call** buttons open `https://calendly.com/rk-empires01/30min` in a new tab
 - [ ] Facebook / Messenger float button opens the Facebook page

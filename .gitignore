@@ -9,6 +9,7 @@ Thumbs.db
 # Editor
 .vscode/
 
-# Nested project repos — managed independently
-rk-empires-platform/
-rk-empires-api/
+# Nested project repos — managed independently (root only; anchored so
+# site pages like /portfolio/rk-empires-platform/ are NOT ignored)
+/rk-empires-platform/
+/rk-empires-api/

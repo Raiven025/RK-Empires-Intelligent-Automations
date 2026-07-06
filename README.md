@@ -8,27 +8,35 @@ AI-powered automation services landing page for Raiven Kaizer Moreno. Custom wor
 
 ```
 /
-├── index.html                   # Main HTML page (semantic, no inline styles or scripts)
+├── index.html                   # Homepage (semantic, no inline styles or scripts)
+├── 404.html                     # Branded not-found page (served automatically by GitHub Pages)
 ├── portfolio/
-│   └── index.html               # Portfolio page — brand identity showcase + automation case studies
+│   ├── index.html               # Portfolio page — brand identity showcase + case study cards
+│   ├── rk-empires-platform/
+│   │   └── index.html           # Case study: real estate management platform
+│   └── subtrack/
+│       └── index.html           # Case study: subscription intelligence platform
 ├── login/
 │   └── index.html               # Client portal login (standalone page)
 ├── admin/login/
 │   └── index.html               # Admin login (standalone page)
 ├── assets/
 │   ├── css/
-│   │   └── styles.css           # All page styles (shared by index + portfolio)
+│   │   └── styles.css           # All page styles (shared by every page)
 │   ├── js/
-│   │   └── main.js              # All page scripts (cursor, canvas, reveal, form, WhatsApp)
+│   │   └── main.js              # All page scripts (cursor, canvas, reveal, form, WhatsApp + QR)
 │   └── images/
 │       ├── rk-empires-logo.jpeg           # Primary brand logo (1254×1254)
+│       ├── rk-empires-logo.webp           # WebP version (used via <picture>)
 │       ├── rk-empires-logo-192.png        # Small logo for nav bars and login cards
-│       ├── rk-empires-brand-guidelines.png # Full brand guidelines sheet (shown on portfolio page)
+│       ├── rk-empires-brand-guidelines.png  # Full brand guidelines sheet (portfolio page)
+│       ├── rk-empires-brand-guidelines.webp # WebP version (~90% smaller, used via <picture>)
+│       ├── whatsapp-qr.png      # QR code encoding the wa.me chat link (desktop booking card)
 │       ├── favicon.ico          # Browser tab icon (generated from logo)
 │       ├── apple-touch-icon.png # iOS home screen icon (180×180, generated from logo)
-│       └── og-image.jpg         # Social share image (1200×630, logo on brand black)
+│       └── og-image.jpg         # Social share card (1200×630: logo + headline text)
 ├── robots.txt                   # Search engine crawl rules
-├── sitemap.xml                  # XML sitemap for search engines
+├── sitemap.xml                  # XML sitemap (/, /portfolio/, both case studies)
 ├── index.html.bak               # Phase 1 original backup
 ├── index.html.bak2              # Phase 2 pre-refactor backup
 └── README.md
@@ -120,8 +128,12 @@ All four are derived from `assets/images/rk-empires-logo.jpeg`. To regenerate af
 
 ### Functionality
 - [ ] Page loads with no browser console errors
-- [ ] All navigation anchors scroll to correct sections (#about, #services, #audit, #booking, #contact)
-- [ ] Nav + footer **Portfolio** link opens `/portfolio/`; portfolio page loads with logo, guidelines image, and case studies
+- [ ] All navigation anchors scroll to correct sections (#about, #services, #pricing, #audit, #booking, #faq, #contact)
+- [ ] Nav + footer **Portfolio** link opens `/portfolio/`; portfolio page loads with logo, guidelines image, and case study cards
+- [ ] "Read the full case study" links open `/portfolio/rk-empires-platform/` and `/portfolio/subtrack/`
+- [ ] FAQ accordion items expand/collapse (native `<details>`, works without JS)
+- [ ] WhatsApp booking option on desktop reveals the QR code panel; scanning the QR opens the wa.me chat
+- [ ] Visiting a bogus URL (e.g. `/does-not-exist`) shows the branded 404 page
 - [ ] Contact form: fill Name + Email + Message → submit → success message appears
 - [ ] Contact form: submit with empty Message → browser validation blocks it
 - [ ] All "Book a Free Call" buttons open Calendly in a new tab
@@ -255,3 +267,4 @@ This is a plain static site — no build step required.
 | Phase 3 | Added favicon/apple-touch-icon refs, created `robots.txt` + `sitemap.xml`, fixed JSON-LD URL trailing slash, expanded README with deployment checklists and security notes |
 | Phase 4 | Domain replacement checklist (8 fields across 3 files), OG image design brief, 404 explanation for missing assets, Final Pre-Deploy Checklist with all launch criteria |
 | Phase 5 | Full rebrand to black + gold identity (Playfair Display / Montserrat, palette from brand guidelines), new logo across nav/login/favicon/OG image, dedicated `/portfolio/` page (brand identity showcase + case studies), Live Projects section removed from homepage |
+| Phase 6 | Packages section (`#pricing`, no fixed prices — audit-first), FAQ section + FAQPage JSON-LD, WhatsApp QR code for desktop, case study detail pages (`/portfolio/rk-empires-platform/`, `/portfolio/subtrack/`), text-rich OG social card, WebP image variants (guidelines PNG 1.4MB → 159KB), branded `404.html` |

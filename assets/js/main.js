@@ -40,11 +40,13 @@ function handleWhatsApp() {
   if (isMobile) {
     window.open(waUrl, '_blank');
   } else {
-    // Show mobile-only notice on desktop
+    // Show mobile-only notice + QR code on desktop
     const desc = document.getElementById('wa-book-desc');
     const note = document.getElementById('wa-contact-note');
+    const qr = document.getElementById('wa-qr');
+    if (qr) qr.hidden = false;
     if (desc) {
-      desc.textContent = '📱 WhatsApp works on mobile — scan or open on your phone';
+      desc.textContent = '📱 Scan the QR code below with your phone to open the chat';
       desc.style.color = 'var(--accent3)';
       setTimeout(() => {
         desc.textContent = 'Chat directly — fastest response';
