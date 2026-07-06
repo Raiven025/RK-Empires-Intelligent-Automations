@@ -97,29 +97,25 @@ Domain replacement is **complete**. Detected from `CNAME` file: `rk-empires.com`
 
 ## Image Assets Required Before Final Launch
 
-Three files must be created and placed in `assets/images/` before going live.
+All image assets exist in `assets/images/`, derived from the brand logo (`rk-empires-logo.jpeg`).
 
 | File | Dimensions | Format | Used for |
 |---|---|---|---|
-| `favicon.ico` | 32×32 px | ICO | Browser tab icon |
+| `favicon.ico` | 16/32/48/64 px | ICO | Browser tab icon |
 | `apple-touch-icon.png` | 180×180 px | PNG | iOS/Android home screen icon |
 | `og-image.jpg` | 1200×630 px | JPG | Social share preview (Facebook, LinkedIn, X/Twitter) |
+| `rk-empires-logo-192.png` | 192×192 px | PNG | Nav bar + login card logo |
 
-### OG Image Brief
+### Brand (source of truth: `assets/images/rk-empires-brand-guidelines.png`)
 
 | Property | Value |
 |---|---|
-| **Headline text** | AI Automation Systems for Growing Businesses |
-| **Brand name** | RK Empires Intelligent Automations |
-| **Background** | Dark navy `#040810` — matching the site |
-| **Accent colours** | Cyan `#00d4ff`, blue `#0066ff`, green `#00ff88` |
-| **Style** | Cyber/AI — grid lines, particle dots, gradient glows |
-| **Minimum readable size** | 600×315 px (social card thumbnail) |
-| **Export** | `.jpg` at 80–90% quality |
+| **Background** | Black `#0d0d0d` / dark gray `#1a1a1a` |
+| **Accent colours** | Primary gold `#d4af37`, deep gold `#b8860b`, light gold `#f0d77b` |
+| **Fonts** | Playfair Display (headings/logo), Montserrat (body) |
+| **Tagline** | Automate · Innovate · Elevate |
 
-**Free tools:** [Canva](https://canva.com) (custom 1200×630), [Figma](https://figma.com)
-
-> Until these files exist, favicon and apple-touch-icon will return **404** in the Network tab — this is harmless and expected. The page loads and all functionality works. The OG image 404 is silent (only hit by social crawlers, not the browser).
+> If the logo changes, regenerate the derived images at the same filenames and sizes (Python + Pillow works: resize `rk-empires-logo.jpeg`, and paste it centered on a 1200×630 `#0d0d0d` canvas for the OG image).
 
 ---
 
@@ -136,7 +132,8 @@ Run this after the site goes live at the real URL.
 - [ ] `https://yourdomain.com/sitemap.xml` loads correctly
 
 ### Navigation & CTAs
-- [ ] All nav anchors scroll to correct sections: `#about` `#services` `#portfolio` `#audit` `#booking` `#contact`
+- [ ] All nav anchors scroll to correct sections: `#about` `#services` `#audit` `#booking` `#contact`
+- [ ] Nav + footer **Portfolio** link opens `/portfolio/` and the page renders (logo, brand guidelines image, case studies)
 - [ ] All footer anchors work
 - [ ] All **Book a Free Call** buttons open `https://calendly.com/rk-empires01/30min` in a new tab
 - [ ] Facebook / Messenger float button opens the Facebook page
@@ -152,7 +149,7 @@ Run this after the site goes live at the real URL.
 - [ ] After confirming, log in to [web3forms.com](https://web3forms.com) and delete the test submission
 
 ### Accessibility & Responsive
-- [ ] Tab key navigates page — cyan focus ring visible on all interactive elements
+- [ ] Tab key navigates page — gold focus ring visible on all interactive elements
 - [ ] `Enter` / `Space` on the WhatsApp div button triggers the handler
 - [ ] DevTools → Rendering → `prefers-reduced-motion: reduce` → no animations, cursor hidden, canvas hidden
 - [ ] DevTools → 390px → nav collapses, cards stack, Messenger button becomes circle

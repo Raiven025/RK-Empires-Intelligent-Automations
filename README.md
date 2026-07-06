@@ -9,21 +9,46 @@ AI-powered automation services landing page for Raiven Kaizer Moreno. Custom wor
 ```
 /
 ├── index.html                   # Main HTML page (semantic, no inline styles or scripts)
+├── portfolio/
+│   └── index.html               # Portfolio page — brand identity showcase + automation case studies
+├── login/
+│   └── index.html               # Client portal login (standalone page)
+├── admin/login/
+│   └── index.html               # Admin login (standalone page)
 ├── assets/
 │   ├── css/
-│   │   └── styles.css           # All page styles (extracted from inline <style>)
+│   │   └── styles.css           # All page styles (shared by index + portfolio)
 │   ├── js/
 │   │   └── main.js              # All page scripts (cursor, canvas, reveal, form, WhatsApp)
 │   └── images/
-│       ├── favicon.ico          # TODO: browser tab icon (32×32 .ico)
-│       ├── apple-touch-icon.png # TODO: iOS home screen icon (180×180 px PNG)
-│       └── og-image.jpg         # TODO: social share image (1200×630 px JPG)
+│       ├── rk-empires-logo.jpeg           # Primary brand logo (1254×1254)
+│       ├── rk-empires-logo-192.png        # Small logo for nav bars and login cards
+│       ├── rk-empires-brand-guidelines.png # Full brand guidelines sheet (shown on portfolio page)
+│       ├── favicon.ico          # Browser tab icon (generated from logo)
+│       ├── apple-touch-icon.png # iOS home screen icon (180×180, generated from logo)
+│       └── og-image.jpg         # Social share image (1200×630, logo on brand black)
 ├── robots.txt                   # Search engine crawl rules
 ├── sitemap.xml                  # XML sitemap for search engines
 ├── index.html.bak               # Phase 1 original backup
 ├── index.html.bak2              # Phase 2 pre-refactor backup
 └── README.md
 ```
+
+---
+
+## Brand
+
+Defined in `assets/images/rk-empires-brand-guidelines.png` (source of truth):
+
+| Element | Value |
+|---|---|
+| **Primary Gold** | `#D4AF37` |
+| **Deep Gold** | `#B8860B` |
+| **White / Light Gray** | `#FFFFFF` / `#E6E6E6` |
+| **Dark Gray / Black** | `#1A1A1A` / `#0D0D0D` |
+| **Headings & logo font** | Playfair Display (Bold) |
+| **Body font** | Montserrat (Regular / Medium) |
+| **Tagline** | Automate · Innovate · Elevate |
 
 ---
 
@@ -82,45 +107,12 @@ Domain replacement is **complete**. Detected from `CNAME`: `rk-empires.com`
 > Update `<lastmod>` in `sitemap.xml` to today’s date when you deploy.
 
 ### Image files
-- [x] `assets/images/favicon.ico` — generated (32×32 PNG-in-ICO)
-- [x] `assets/images/apple-touch-icon.png` — generated (180×180 PNG)
-- [x] `assets/images/og-image.jpg` — generated (1200×630 JPEG)
+- [x] `assets/images/favicon.ico` — generated from the brand logo (16/32/48/64 ICO)
+- [x] `assets/images/apple-touch-icon.png` — generated from the brand logo (180×180 PNG)
+- [x] `assets/images/og-image.jpg` — logo centered on brand black `#0D0D0D` (1200×630 JPEG)
+- [x] `assets/images/rk-empires-logo-192.png` — small nav/login logo (192×192 PNG)
 
----
-
-## Required Image Assets
-
-Three image files are referenced in `index.html`. All have been generated and committed. Replace with custom branded versions any time before or after launch.
-
-| File | Size | Format | Purpose |
-|---|---|---|---|
-| `assets/images/favicon.ico` | 32×32 px | ICO | Browser tab icon |
-| `assets/images/apple-touch-icon.png` | 180×180 px | PNG | iOS/Android home screen icon |
-| `assets/images/og-image.jpg` | 1200×630 px | JPG | Social share preview (Facebook, LinkedIn, X) |
-
-### OG Image Design Brief
-
-| Property | Value |
-|---|---|
-| **Text line 1** | RK Empires Intelligent Automations |
-| **Text line 2** | AI Automation Systems for Growing Businesses |
-| **Background** | Dark navy/black (`#040810`) matching site theme |
-| **Accent colour** | Cyan `#00d4ff` for text highlights or borders |
-| **Style** | Cyber / AI tech — grid lines, particle dots, or gradient glows |
-| **Readable at** | 600×315 px thumbnail (Facebook/LinkedIn preview size) |
-
-Free tools to create this: [Canva](https://canva.com) (custom size 1200×630), [Figma](https://figma.com), or any image editor. Export as `.jpg` at 80–90% quality.
-
-### Expected 404s Until Images Are Created
-
-Until the three image files are placed in `assets/images/`, the browser will log these **expected and harmless** 404 errors in the Network tab:
-
-```
-GET /assets/images/favicon.ico       404
-GET /assets/images/apple-touch-icon.png  404
-```
-
-The `og-image.jpg` 404 is silent (not fetched by the browser at page load — only by social crawlers). **The page renders and all functionality works normally without these files.**
+All four are derived from `assets/images/rk-empires-logo.jpeg`. To regenerate after a logo change, resize with any image tool (or Python/Pillow) keeping the same filenames and sizes.
 
 ---
 
@@ -128,7 +120,8 @@ The `og-image.jpg` 404 is silent (not fetched by the browser at page load — on
 
 ### Functionality
 - [ ] Page loads with no browser console errors
-- [ ] All navigation anchors scroll to correct sections (#about, #services, #portfolio, #audit, #booking, #contact)
+- [ ] All navigation anchors scroll to correct sections (#about, #services, #audit, #booking, #contact)
+- [ ] Nav + footer **Portfolio** link opens `/portfolio/`; portfolio page loads with logo, guidelines image, and case studies
 - [ ] Contact form: fill Name + Email + Message → submit → success message appears
 - [ ] Contact form: submit with empty Message → browser validation blocks it
 - [ ] All "Book a Free Call" buttons open Calendly in a new tab
@@ -137,7 +130,7 @@ The `og-image.jpg` 404 is silent (not fetched by the browser at page load — on
 - [ ] WhatsApp button on **desktop**: shows "📱 WhatsApp works on mobile" notice
 
 ### Accessibility
-- [ ] Tab through page — cyan focus ring visible on links, buttons, and the WhatsApp div button
+- [ ] Tab through page — gold focus ring visible on links, buttons, and the WhatsApp div button
 - [ ] Press Enter or Space on the WhatsApp button — triggers WhatsApp handler
 - [ ] Screen reader announces form success/error messages (role=alert, aria-live)
 
@@ -168,8 +161,8 @@ Run through this list once before making the site public. Use a local server (`L
 - [ ] Browser console shows **zero errors** on page load
 
 ### Navigation & Links
-- [ ] All nav anchors scroll to correct sections: `#about` `#services` `#portfolio` `#audit` `#booking` `#contact`
-- [ ] All footer anchors scroll to correct sections
+- [ ] All nav anchors scroll to correct sections: `#about` `#services` `#audit` `#booking` `#contact`
+- [ ] All footer anchors scroll to correct sections; **Portfolio** opens `/portfolio/`
 - [ ] All `target="_blank"` external links have `rel="noopener noreferrer"` *(already verified in QA pass)*
 - [ ] All Calendly links open `https://calendly.com/rk-empires01/30min` in a new tab
 - [ ] Facebook / Messenger links open the correct Facebook page
@@ -183,7 +176,7 @@ Run through this list once before making the site public. Use a local server (`L
 - [ ] WhatsApp button on **desktop**: shows mobile-only notice
 
 ### Accessibility & Responsive
-- [ ] Tab key navigates through page — cyan focus ring visible on all interactive elements
+- [ ] Tab key navigates through page — gold focus ring visible on all interactive elements
 - [ ] Press `Enter` or `Space` on the WhatsApp button — triggers handler
 - [ ] DevTools → Rendering → `prefers-reduced-motion: reduce` → no animations, cursor hidden, canvas hidden, all `.reveal` content visible
 - [ ] DevTools → device toolbar → **390px** — nav collapses, audit cards stack, Messenger button is circle
@@ -261,3 +254,4 @@ This is a plain static site — no build step required.
 | Phase 2 QA | Regression pass — zero issues found, all checks passed |
 | Phase 3 | Added favicon/apple-touch-icon refs, created `robots.txt` + `sitemap.xml`, fixed JSON-LD URL trailing slash, expanded README with deployment checklists and security notes |
 | Phase 4 | Domain replacement checklist (8 fields across 3 files), OG image design brief, 404 explanation for missing assets, Final Pre-Deploy Checklist with all launch criteria |
+| Phase 5 | Full rebrand to black + gold identity (Playfair Display / Montserrat, palette from brand guidelines), new logo across nav/login/favicon/OG image, dedicated `/portfolio/` page (brand identity showcase + case studies), Live Projects section removed from homepage |
