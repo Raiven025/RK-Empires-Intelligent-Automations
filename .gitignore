@@ -13,3 +13,4 @@ Thumbs.db
 # site pages like /portfolio/rk-empires-platform/ are NOT ignored)
 /rk-empires-platform/
 /rk-empires-api/
+/rk-empires-site/

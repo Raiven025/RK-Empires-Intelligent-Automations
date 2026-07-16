@@ -8,12 +8,13 @@ Static marketing site for RK Empires Intelligent Automations, live at **https://
 
 ## Repository Boundaries
 
-Two nested directories are **separate git repositories**, excluded by the root `.gitignore` and managed independently. Never commit their files from this repo; run git commands inside those directories instead.
+Three nested directories are **separate git repositories**, excluded by the root `.gitignore` and managed independently. Never commit their files from this repo; run git commands inside those directories instead.
 
-The `.gitignore` patterns for them are root-anchored (`/rk-empires-platform/`, `/rk-empires-api/`) on purpose — unanchored patterns would also ignore same-named site paths like `portfolio/rk-empires-platform/`. Keep the leading slash.
+The `.gitignore` patterns for them are root-anchored (`/rk-empires-platform/`, `/rk-empires-api/`, `/rk-empires-site/`) on purpose — unanchored patterns would also ignore same-named site paths like `portfolio/rk-empires-platform/`. Keep the leading slash.
 
 - `rk-empires-platform/` — platform frontend (React 18 + Vite, TailwindCSS, Zustand, React Router, Axios). Commands: `npm run dev`, `npm run build`, `npm run preview`.
 - `rk-empires-api/` — platform backend (Express + Prisma + PostgreSQL, JWT auth). Commands: `npm run dev` (nodemon), `npm start`, `npm run migrate`, `npm run seed`, `npm run studio`, `npm run generate`.
+- `rk-empires-site/` — **Next.js rebuild of the marketing site** (Next 15 App Router, plain JSX, ported black+gold design, blog + lead capture + login SSO + Stripe booking). Commands: `npm run dev`, `npm run build`, `npm start`. Intended to replace this repo's static site once deployed to Vercel and DNS is cut over; until then the static site in this repo stays live. See `rk-empires-site/README.md` for deploy steps.
 
 `PLATFORM_PLAN.md` documents the platform architecture (marketing site stays untouched; frontend targets app.rk-empires.com, backend targets api.rk-empires.com).
 
