@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reserve Your Build Slot | RK Empires Intelligent Automations</title>
+<!-- SEO -->
+<meta name="description" content="Reserve your automation build slot with RK Empires &mdash; book a free 30-minute discovery call, or secure your project with a priority deposit via card, GCash, Maya, or PayPal.">
+<meta name="author" content="Raiven Kaizer Moreno">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://rk-empires.com/book/">
+<!-- Icons -->
+<link rel="icon" href="/assets/images/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rk-empires.com/book/">
+<meta property="og:title" content="Reserve Your Build Slot | RK Empires Intelligent Automations">
+<meta property="og:description" content="Book a free 30-minute discovery call, or secure your project slot with a priority deposit &mdash; card, GCash, Maya, or PayPal.">
+<meta property="og:image" content="https://rk-empires.com/assets/images/og-image.jpg">
+<meta property="og:site_name" content="RK Empires Intelligent Automations">
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://rk-empires.com/book/">
+<meta name="twitter:title" content="Reserve Your Build Slot | RK Empires Intelligent Automations">
+<meta name="twitter:description" content="Book a free 30-minute discovery call, or secure your project slot with a priority deposit.">
+<meta name="twitter:image" content="https://rk-empires.com/assets/images/og-image.jpg">
+<meta name="theme-color" content="#0d0d0d">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/700.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/800.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/400.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/500.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/600.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/700.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="canvas-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo"><img src="/assets/images/rk-empires-logo-192.png" alt="RK Empires Intelligent Automations logo">RK<span>.</span>EMPIRES</a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/portfolio/">Portfolio</a></li>
+    <li><a href="/#audit">Audit</a></li>
+    <li><a href="/#booking">Book a Call</a></li>
+  </ul>
+  <a href="/login" class="nav-cta"><span>Sign In</span></a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div>
+    <div class="hero-tag">Automate &middot; Innovate &middot; Elevate</div>
+    <h1>Reserve your <span class="line2">build slot</span></h1>
+    <p class="hero-sub">Every project starts with a free discovery call &mdash; and when you&apos;re ready to move, you can secure your place in the build queue.</p>
+  </div>
+</section>
+
+<!-- BOOKING OPTIONS -->
+<section id="book-options" aria-label="Booking options">
+  <div class="section-inner">
+    <div class="book-grid reveal">
+
+      <!-- FREE DISCOVERY CALL -->
+      <div class="booking-card book-card">
+        <div class="bk-badge">&#128197; Free Discovery Call</div>
+        <div class="bk-title">Book your free<br>30-min session</div>
+        <div class="bk-sub">Every business is different. Book a free 30-minute discovery call and I&apos;ll map out exactly what can be automated in your workflow &mdash; no commitment, no generic packages.</div>
+        <div class="bk-options">
+          <a href="https://calendly.com/rk-empires01/30min" target="_blank" rel="noopener noreferrer" class="bk-opt bk-opt-cal">
+            <span class="bk-opt-icon">&#128197;</span>
+            <div>
+              <div class="bk-opt-title">Book My Free 30-Min Discovery Call</div>
+              <div class="bk-opt-desc">Pick a time that works for you &mdash; instant confirmation</div>
+            </div>
+            <span class="bk-opt-arrow">&#8599;</span>
+          </a>
+        </div>
+        <div class="bk-note">&#9200; Typical response time: within 24 hours &middot; All timezones welcome</div>
+      </div>
+
+      <!-- PRIORITY BUILD DEPOSIT -->
+      <div class="booking-card book-card">
+        <div class="bk-badge">&#9889; Priority Build Deposit</div>
+        <div class="bk-title">Secure your<br>project slot</div>
+        <div class="bk-sub">Already had your audit and received your custom quote? Reserve your place in the build queue with a priority deposit &mdash; applied 100% toward your project total.</div>
+        <ul class="book-points">
+          <li><span class="bst-icon">&#10003;</span> Deposit is applied 100% toward your project total</li>
+          <li><span class="bst-icon">&#10003;</span> Locks in your priority spot in the build queue</li>
+          <li><span class="bst-icon">&#10003;</span> Secure hosted checkout &mdash; you review the amount before confirming</li>
+        </ul>
+        <button type="button" class="btn-primary book-pay-btn" data-provider="paymongo">Pay with Card / GCash / Maya</button>
+        <button type="button" class="btn-secondary book-pay-btn book-pay-alt" data-provider="paypal">Pay with PayPal</button>
+        <p class="book-alert" id="book-error" role="alert" aria-live="assertive" style="display:none">Online payments are being finalized. In the meantime, book the free discovery call or email <a href="mailto:rk.empires01@gmail.com">rk.empires01@gmail.com</a> to reserve your slot.</p>
+        <div class="bk-note">&#128274; Payments are processed by PayMongo (cards, GCash, Maya, GrabPay) or PayPal &mdash; card details never touch this site.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">RK<span>.</span>EMPIRES <span class="footer-tagline">Intelligent Automations</span></div>
+  <div class="footer-text">&copy; 2026 RK Empires &middot; Raiven Kaizer Moreno &middot; Worldwide, Remote-First</div>
+  <div class="footer-links">
+    <a href="/#about">About</a><a href="/#services">Services</a><a href="/#pricing">Packages</a><a href="/portfolio/">Portfolio</a><a href="/#audit">Audit</a><a href="/#booking">Book a Call</a><a href="/#contact">Contact</a>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/book.js"></script>
+
+<!-- Messenger Floating Button -->
+<a href="https://www.facebook.com/rkempiresintelligentautomations" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on Facebook Messenger" class="ms-float">
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.36 2 2 6.13 2 11.2c0 2.9 1.28 5.49 3.32 7.28V22l3.13-1.72c.83.23 1.71.35 2.55.35 5.64 0 10-4.13 10-9.2C21 6.13 17.64 2 12 2zm1.09 12.38l-2.55-2.72-4.98 2.72 5.48-5.82 2.61 2.72 4.91-2.72-5.47 5.82z"/>
+  </svg>
+  <span class="ms-txt">Chat with us</span>
+</a>
+</body>
+</html>

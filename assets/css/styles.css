@@ -333,6 +333,22 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .pf-cta .section-lead{margin-left:auto;margin-right:auto}
 .footer-tagline{color:var(--muted);font-size:12px;font-weight:400}
 @media(max-width:900px){.pf-featured{grid-template-columns:1fr;gap:44px}}
+/* BOOK PAGE (/book/ — interim static checkout, mirrors rk-empires-site) */
+.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;max-width:1000px;margin:0 auto}
+.book-card{position:static}
+.book-points{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.book-points li{display:flex;gap:10px;font-size:12px;color:var(--muted);line-height:1.7;align-items:flex-start}
+.book-pay-btn{display:block;width:100%;cursor:pointer;margin-bottom:12px;border:none}
+button.btn-secondary.book-pay-btn{border:1px solid rgba(255,255,255,0.15);background:transparent}
+.book-pay-btn:disabled{opacity:0.6;cursor:wait;transform:none;box-shadow:none}
+.book-pay-alt{margin-bottom:20px}
+.book-alert{font-size:12px;line-height:1.8;color:var(--text);border:1px solid rgba(212,175,55,0.35);background:rgba(212,175,55,0.06);padding:14px 16px;margin-bottom:20px}
+.book-alert a{color:var(--accent);text-decoration:none}
+.capture-status{font-size:13px;line-height:1.8;margin-top:20px;color:var(--muted)}
+.capture-status.error{color:var(--text);border:1px solid rgba(212,175,55,0.35);background:rgba(212,175,55,0.06);padding:14px 16px}
+.capture-status a{color:var(--accent)}
+.success-actions{margin-top:44px}
+@media(max-width:900px){.book-grid{grid-template-columns:1fr}}
 /* Prefers reduced motion */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}
